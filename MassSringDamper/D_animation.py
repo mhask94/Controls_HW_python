@@ -3,7 +3,6 @@ import matplotlib.patches as mpatches
 import numpy as np
 import D_param as P
 
-
 class D_animation:
     '''
         Create Mass Spring Damper animation
@@ -17,7 +16,9 @@ class D_animation:
         self.length=P.length
         self.width=P.width
         plt.axis([P.l_lim, P.u_lim, P.l_lim, P.u_lim]) # Change the x,y axis limits
-        plt.plot([P.l_lim, 0], [P.u_lim, 0],'k--')    # Draw ground
+        plt.plot([P.l_lim, P.u_lim], [0, 0],'k--')    # Draw ground
+        plt.title('Mass Spring Damper')
+        plt.xlabel('X [m]')
 
         # Draw pendulum is the main function that will call the functions:
         # drawCart, drawCircle, and drawRod to create the animation.
@@ -37,7 +38,7 @@ class D_animation:
 
     def drawMass(self, u):
         # Process inputs to function
-        x = u[0]  # x coordinate
+        x = u  # x coordinate
         y = P.gap      # y coordinate
         xy = (x, y)     # Bottom left corner of rectangle
 
@@ -55,13 +56,13 @@ class D_animation:
 
     def drawSpring(self, u):
         # Process inputs to function
-        x = u[0]   # x position of cube, m
-        h = P.length*.15
+        x = u   # x position of cube, m
+        h = P.length*.25
         dh = P.length*.1
         xl = P.l_lim
-        dx = (x-P-l_lim)/3.0
+        dx = (x-P.l_lim)/3.0
         ddx = dx/6.0
-        points_x = [xl,xl+dx,xl+dx+.5*ddx,xl+dx+1.5*ddx,xl+dx+2.5ddx,xl+dx+3.5*ddx,xl+dx+4.5*ddx,xl+dx+5.5*ddx,xl+2*dx,x]
+        points_x = [xl,xl+dx,xl+dx+.5*ddx,xl+dx+1.5*ddx,xl+dx+2.5*ddx,xl+dx+3.5*ddx,xl+dx+4.5*ddx,xl+dx+5.5*ddx,xl+2*dx,x]
         points_y = [h,h,h+dh,h-dh,h+dh,h-dh,h+dh,h-dh,h,h]
 
         # When the class is initialized, a line object will be
@@ -70,19 +71,18 @@ class D_animation:
         if self.flagInit == True:
             # Create the line object and append its handle
             # to the handle list.
-            line, =self.ax.plot(points_x, points_y, lw=5, c='blue')
+            line, =self.ax.plot(points_x, points_y, lw=1, c='black')
             self.handle.append(line)
-            self.flagInit=False
         else:
-            self.handle[0].set_xdata(X)   # Update the line
-            self.handle[0].set_ydata(Y)
+            self.handle[1].set_xdata(points_x)   # Update the line
+            self.handle[1].set_ydata(points_y)
 
     def drawDamper(self, u):
         # Process inputs to function
-        theta = u[0]   # angle of arm, rads
+        x = u   # angle of arm, rads
 
-        X = [0, self.length*np.cos(theta)]  # X data points
-        Y = [0, self.length*np.sin(theta)]  # Y data points
+        X = [P.l_lim, x]  # X data points
+        Y = [P.length*.75, P.length*.75]  # Y data points
 
         # When the class is initialized, a line object will be
         # created and added to the axes. After initialization, the
@@ -90,22 +90,21 @@ class D_animation:
         if self.flagInit == True:
             # Create the line object and append its handle
             # to the handle list.
-            line, =self.ax.plot(X, Y, lw=5, c='blue')
+            line, =self.ax.plot(X, Y, lw=1, c='black')
             self.handle.append(line)
-            self.flagInit=False
         else:
-            self.handle[0].set_xdata(X)   # Update the line
-            self.handle[0].set_ydata(Y)
+            self.handle[2].set_xdata(X)   # Update the line
+            self.handle[2].set_ydata(Y)
 
 
 # Used see the animation from the command line
-if __name__ == "__main__":
-
-    simAnimation = armAnimation()    # Create Animate object
-    theta = 0.0*np.pi/180                 # Angle of arm, rads
-    simAnimation.drawArm([z, theta, 0, 0])  # Draw the arm
-    #plt.show()
-    # Keeps the program from closing until the user presses a button.
-    print('Press key to close')
-    plt.waitforbuttonpress()
-    plt.close()
+# if __name__ == "__main__":
+#
+#     simAnimation = D_animation()    # Create Animate object
+#     #theta = 0.0*np.pi/180                 # Angle of arm, rads
+#     simAnimation.drawAll([x])  # Draw the arm
+#     #plt.show()
+#     # Keeps the program from closing until the user presses a button.
+#     print('Press key to close')
+#     plt.waitforbuttonpress()
+#     plt.close()
