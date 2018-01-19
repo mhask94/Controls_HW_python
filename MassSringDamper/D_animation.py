@@ -30,7 +30,7 @@ class D_animation:
         self.drawMass(x)
         self.drawSpring(x)
         self.drawDamper(x)
-        self.ax.axis('equal') # This will cause the image to not distort
+        self.ax.axis('equal')  # This will cause the image to not distort
 
         # After each function has been called, initialization is over.
         if self.flagInit == True:
@@ -80,9 +80,17 @@ class D_animation:
     def drawDamper(self, u):
         # Process inputs to function
         x = u   # angle of arm, rads
+        dh = P.length*.1
+        dx = dh/2.0
+        xl = P.l_lim
+        h = P.length
+        mid = (x-xl)/2.0
 
-        X = [P.l_lim, x]  # X data points
-        Y = [P.length*.75, P.length*.75]  # Y data points
+        X1 = [xl,xl+mid,xl+mid,xl+mid+dx,xl+mid,xl+mid,xl+mid+dx]  # X data points
+        Y1 = [h*.75,h*.75,h*.75+dh,h*.75+dh,h*.75+dh,h*.75-dh,h*.75-dh]  # Y data points
+
+        X2 = [xl+mid+dx,xl+mid+dx,xl+mid+dx,x]
+        Y2 = [h*.75+dh/2,h*.75-dh/2,h*.75,h*.75]
 
         # When the class is initialized, a line object will be
         # created and added to the axes. After initialization, the
@@ -90,11 +98,15 @@ class D_animation:
         if self.flagInit == True:
             # Create the line object and append its handle
             # to the handle list.
-            line, =self.ax.plot(X, Y, lw=1, c='black')
-            self.handle.append(line)
+            line1, = self.ax.plot(X1, Y1, lw=1, c='black')
+            line2, = self.ax.plot(X2, Y2, lw=1, c='black')
+            self.handle.append(line1)
+            self.handle.append(line2)
         else:
-            self.handle[2].set_xdata(X)   # Update the line
-            self.handle[2].set_ydata(Y)
+            self.handle[2].set_xdata(X1)   # Update the line1
+            self.handle[2].set_ydata(Y1)
+            self.handle[3].set_xdata(X2)  # Update the line2
+            self.handle[3].set_ydata(Y2)
 
 
 # Used see the animation from the command line
