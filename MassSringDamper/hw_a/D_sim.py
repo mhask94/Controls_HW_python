@@ -22,9 +22,9 @@ z = P.x0;
 while t < P.t_end:  # main simulation loop
     # set variables
     if t < 6:
-        z = z - .08
+        z = z - .2
     if t >= 6:
-        z = z + .08
+        z = z + .2
 
     # r = reference.square(t)
     # theta = thetaRef.sin(t)
