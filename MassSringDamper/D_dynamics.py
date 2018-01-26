@@ -1,6 +1,6 @@
 import numpy as np
 import random
-from D_param import D_param as P
+import D_param as P
 
 
 class D_dynamics:
@@ -11,7 +11,7 @@ class D_dynamics:
     def __init__(self):
         # Initial state conditions
         self.state = np.matrix([[P.z0],          # z initial position
-                                [P.zdot0]]),       # zdot initial velocity
+                                [P.zdot0]])       # zdot initial velocity
         #################################################
         # The parameters for any physical system are never known exactly.  Feedback
         # systems need to be designed to be robust to this uncertainty.  In the simulation
@@ -42,16 +42,11 @@ class D_dynamics:
             Return xdot = f(x,u), the derivatives of the continuous states, as a matrix
         '''
         # re-label states and inputs for readability
-        z = state.item(0)
-        zdot = state.item(1)
-        F = u[0]
+        z = state[0,0]
+        zdot = state[1,0]
+        f = u[0]
         # The equations of motion.
-        M = np.matrix([[self.m1+self.m2, self.m1*(self.ell/2.0)*np.cos(theta)],
-                       [self.m1*(self.ell/2.0)*np.cos(theta), self.m1*(self.ell/2.0)**2]])
-        C = np.matrix([[self.m1*(self.ell/2.0)*thetadot**2*np.sin(theta) + F - self.b*zdot],
-                       [self.m1*self.g*(self.ell/2.0)*np.sin(theta)]])
-        tmp = np.linalg.inv(M)*C
-        zddot = 1.0/self.m
+        zddot = 1.0/self.m*(f-self.b*zdot-self.k*z)
 
         # build xdot and return
         xdot = np.matrix([[zdot], [zddot]])
@@ -60,16 +55,15 @@ class D_dynamics:
     def outputs(self):
         '''
             Returns the measured outputs as a list
-            [z, theta] with added Gaussian noise
+            [z] with added Gaussian noise
         '''
         # re-label states for readability
-        z = self.state.item(0)
-        theta = self.state.item(1)
+        z = self.state[0,0]
         # add Gaussian noise to outputs
-        z_m = z + random.gauss(0, 0.01)
-        theta_m = theta + random.gauss(0, 0.001)
+        # z_m = z + random.gauss(0, 0.01)
+
         # return measured outputs
-        return [z_m, theta_m]
+        return [z]
 
     def states(self):
         '''

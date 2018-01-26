@@ -24,12 +24,12 @@ class D_animation:
         # drawCart, drawCircle, and drawRod to create the animation.
     def drawAll(self, u):
         # Process inputs to function
-        x = u[0]        # Horizontal position of cart, m
+        z = u[0]        # Horizontal position of cart, m
         #theta = u[1]   # Angle of pendulum, rads
 
-        self.drawMass(x)
-        self.drawSpring(x)
-        self.drawDamper(x)
+        self.drawMass(z)
+        self.drawSpring(z)
+        self.drawDamper(z)
         self.ax.axis('equal')  # This will cause the image to not distort
 
         # After each function has been called, initialization is over.
