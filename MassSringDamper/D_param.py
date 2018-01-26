@@ -3,21 +3,20 @@ import numpy as np
 # import control as cnt
 
 # Physical parameters of the arm known to the controller
-m = 0.5     # Mass of the block, kg
-# ell = 0.3    # Length of the arm, m
-# g = 9.8       # Gravity, m/s**2
-b = 0.05      # Damping coefficient, Nms
+m = 5.0      # Mass of the block, kg
+k = 3.0      # spring constant, m
+b = 0.5      # Damping coefficient, Nms
 
 # parameters for animation
 length = 2    # height of mass in animation
-width = 0.3   # width of arm in animation
+width = 0.3   # width of mass in animation
 gap = .005
 l_lim = -5
 u_lim = 5
 
 # Initial Conditions
-x0 = 0.0  # ,rads
-xdot0 = 0.0         # ,rads/s
+z0 = 0.0  # ,rads
+zdot0 = 0.0         # ,rads/s
 
 # Simulation Parameters
 t_start = 0.0  # Start time of simulation
