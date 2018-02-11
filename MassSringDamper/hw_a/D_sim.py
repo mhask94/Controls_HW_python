@@ -18,7 +18,7 @@ import matplotlib.patches as patches
 animation = D_animation()
 
 t = P.t_start  # time starts at t_start
-z = P.x0;
+z = P.x0
 while t < P.t_end:  # main simulation loop
     # set variables
     if t < 6:
