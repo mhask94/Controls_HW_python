@@ -32,5 +32,8 @@ beta = (2.0*sigma-Ts)/(2.0*sigma+Ts)  # dirty derivative gain
 force_max = 2.0                # Max force, N
 
 # gains
-kp = 4.5
-kd = 12.0
+tr = 2.2
+h = 0.7
+Wn = 2.2 / tr
+kp = m*Wn*Wn-k
+kd = 2*m*h*Wn-b

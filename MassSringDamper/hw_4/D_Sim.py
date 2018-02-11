@@ -1,7 +1,7 @@
 import sys
 sys.path.append('..')  # add parent directory
 import matplotlib.pyplot as plt
-import numpy as np
+# import numpy as np
 import D_param as P
 from D_dynamics import D_dynamics
 from D_controller import D_controller

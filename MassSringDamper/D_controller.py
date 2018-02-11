@@ -1,5 +1,4 @@
 import numpy as np
-import D_ParamHW4 as P4
 import sys
 sys.path.append('..')  # add parent directory
 import D_param as P
@@ -11,7 +10,7 @@ class D_controller:
     def __init__(self):
         # Instantiates the PD object
         self.zCtrl = PDControl(P.kp, P.kd, P.force_max, P.beta, P.Ts)
-        # self.limit = P0.force_max
+        self.limit = P.force_max
 
     def u(self, y_r, y):
         # y_r is the referenced input
@@ -26,7 +25,7 @@ class D_controller:
         force_tilde = self.zCtrl.PD(z_r, z, False)
         # compute total torque
         force = force_e + force_tilde
-        # force = self.saturate(force)
+        force = self.saturate(force)
         return [force]
 
     def saturate(self, u):
