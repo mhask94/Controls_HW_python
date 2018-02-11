@@ -58,7 +58,7 @@ class D_dynamics:
             [z] with added Gaussian noise
         '''
         # re-label states for readability
-        z = self.state[0,0]
+        z = self.state[0].T.tolist()[0]
         # add Gaussian noise to outputs
         # z_m = z + random.gauss(0, 0.01)
 
