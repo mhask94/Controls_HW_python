@@ -57,5 +57,5 @@ class PDControl:
 
     def saturate(self,u):
         if abs(u) > self.limit:
-            # u = self.limit*np.sign(u)
+            u = self.limit*np.sign(u)
         return u

@@ -12,7 +12,7 @@ from plotData import plotData
 # instantiate arm, controller, and reference classes
 msd = D_dynamics()
 ctrl = D_controller()
-reference = signalGenerator(amplitude=1.0, frequency=0.08)
+reference = signalGenerator(amplitude=1.0, frequency=0.03)
 
 # instantiate the simulation plots and animation
 dataPlot = plotData()
