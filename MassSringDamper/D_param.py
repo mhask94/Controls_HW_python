@@ -1,4 +1,4 @@
-# Inverted Pendulum Parameter File
+# Mass Spring Damper Parameter File
 # import numpy as np
 # import control as cnt
 
@@ -29,4 +29,8 @@ sigma = 0.05  # cutoff freq for dirty derivative
 beta = (2.0*sigma-Ts)/(2.0*sigma+Ts)  # dirty derivative gain
 
 # saturation limits
-force_max = 1.0                # Max torque, N-m
+force_max = 2.0                # Max force, N
+
+# gains
+kp = 4.5
+kd = 12.0

@@ -20,14 +20,14 @@ class plotData:
 
         # Instantiate lists to hold the time and data histories
         self.time_history = []  # time
-        self.theta_ref_history = []  # reference angle
-        self.theta_history = []  # angle theta
-        self.torque_history = []  # control torque
+        self.z_ref_history = []  # reference angle
+        self.z_history = []  # angle theta
+        self.force_history = []  # control torque
 
         # create a handle for every subplot.
         self.handle = []
-        self.handle.append(myPlot(self.ax[0], ylabel='theta(deg)', title='Arm Data'))
-        self.handle.append(myPlot(self.ax[1], xlabel='t(s)', ylabel='torqe(N-m)'))
+        self.handle.append(myPlot(self.ax[0], ylabel='Z(m)', title='MSD Data'))
+        self.handle.append(myPlot(self.ax[1], xlabel='t(s)', ylabel='Force(N)'))
 
     def updatePlots(self, t, reference, states, ctrl):
         '''
@@ -35,13 +35,13 @@ class plotData:
         '''
         # update the time history of all plot variables
         self.time_history.append(t)  # time
-        self.theta_ref_history.append(180.0/np.pi*reference[0])  # reference base position
-        self.theta_history.append(180.0/np.pi*states[0])  # rod angle (converted to degrees)
-        self.torque_history.append(ctrl[0])  # force on the base
+        self.z_ref_history.append(reference[0])  # reference base position
+        self.z_history.append(states[0])  # rod angle (converted to degrees)
+        self.force_history.append(ctrl[0])  # force on the base
 
         # update the plots with associated histories
-        self.handle[0].updatePlot(self.time_history, [self.theta_history, self.theta_ref_history])
-        self.handle[1].updatePlot(self.time_history, [self.torque_history])
+        self.handle[0].updatePlot(self.time_history, [self.z_history, self.z_ref_history])
+        self.handle[1].updatePlot(self.time_history, [self.force_history])
 
 
 class myPlot:
