@@ -1,15 +1,15 @@
 import numpy as np
 import sys
-sys.path.append('..')  # add parent directory
+# sys.path.append('..')  # add parent directory
 import D_param as P
-from PDControl import PDControl
+from PIDControl import PIDControl
 
 
 class D_controller:
 
     def __init__(self):
         # Instantiates the PD object
-        self.zCtrl = PDControl(P.kp, P.kd, P.force_max, P.beta, P.Ts)
+        self.zCtrl = PIDControl(P.kp, P.kd, P.force_max, P.beta, P.Ts)
         self.limit = P.force_max
 
     def u(self, y_r, y):
@@ -22,9 +22,10 @@ class D_controller:
         # compute equilibrium force force_e
         force_e = P.k * z
         # compute the linearized torque using PD
-        force_tilde = self.zCtrl.PD(z_r, z, False)
+        force_tilde = self.zCtrl.PID(z_r, z,False)
         # compute total torque
-        force = force_e + force_tilde
+        # force = force_e + force_tilde
+        force = force_tilde
         force = self.saturate(force)
         return [force]
 

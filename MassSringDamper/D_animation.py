@@ -17,6 +17,7 @@ class D_animation:
         self.width=P.width
         plt.axis([P.l_lim, P.u_lim, P.l_lim, P.u_lim]) # Change the x,y axis limits
         plt.plot([P.l_lim, P.u_lim], [0, 0],'k--')    # Draw ground
+        plt.plot([P.l_lim, P.l_lim], [0, P.length],'k')    # Draw ground for spring
         plt.title('Mass Spring Damper')
         plt.xlabel('X [m]')
 
