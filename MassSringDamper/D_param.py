@@ -27,7 +27,7 @@ zdot0 = 0.0         # ,rads/s
 # Simulation Parameters
 t_start = 0.0  # Start time of simulation
 t_end = 20.0  # End time of simulation
-Ts = .05  # sample time for simulation
+Ts = .025  # sample time for simulation
 t_plot = .1  # the plotting and animation is updated at this rate
 
 # dirty derivative parameters
@@ -35,7 +35,7 @@ sigma = 0.05  # cutoff freq for dirty derivative
 beta = (2.0*sigma-Ts)/(2.0*sigma+Ts)  # dirty derivative gain
 
 # saturation limits
-force_max = 10.0                # Max force, N
+force_max = 10000.0                # Max force, N
 
 # gains
 tr = 2.0
