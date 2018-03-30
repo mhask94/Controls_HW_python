@@ -9,15 +9,15 @@ class LSFControl:
         # self.b1 = 0.03323
         # self.a1 = -0.9335
 
-        # use these for a = 7 (no peak)
-        self.b0 = 0.08046
-        self.b1 = self.b0
-        self.a1 = -0.8391
-
-        # # use these for a = 8 (little peak)
-        # self.b0 = 0.09091
+        # # use these for a = 7 (no peak)
+        # self.b0 = 0.08046
         # self.b1 = self.b0
-        # self.a1 = -0.8182
+        # self.a1 = -0.8391
+
+        # use these for a = 8 (little peak)
+        self.b0 = 0.09091
+        self.b1 = self.b0
+        self.a1 = -0.8182
 
         # # use these for a = 15 (really fast response)
         # self.b0 = 0.1579
