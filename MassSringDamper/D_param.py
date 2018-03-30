@@ -35,7 +35,7 @@ sigma = 0.05  # cutoff freq for dirty derivative
 beta = (2.0*sigma-Ts)/(2.0*sigma+Ts)  # dirty derivative gain
 
 # saturation limits
-force_max = 10000.0                # Max force, N
+force_max = 50.0                # Max force, N
 
 # gains
 tr = 2.0
