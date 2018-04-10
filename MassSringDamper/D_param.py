@@ -9,9 +9,9 @@ b = 0.5      # Damping coefficient, Nms
 
 # add uncertainty to the parameters
 fudge = 0.20
-m *= np.random.uniform(1-fudge,1+fudge)
-k *= np.random.uniform(1-fudge,1+fudge)
-b *= np.random.uniform(1-fudge,1+fudge)
+# m *= np.random.uniform(1-fudge,1+fudge)
+# k *= np.random.uniform(1-fudge,1+fudge)
+# b *= np.random.uniform(1-fudge,1+fudge)
 
 # parameters for animation
 length = 1    # height of mass in animation
