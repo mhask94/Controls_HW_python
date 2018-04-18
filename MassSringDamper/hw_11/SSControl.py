@@ -15,7 +15,8 @@ class SSControl:
         self.A = np.mat([[0,1],[-0.6,-0.1]])
         self.B = np.mat([[0.],[0.2]])
         self.C = np.mat([[1.,0.]])
-        self.K = np.mat([3.05,7.2])
+        # self.K = np.mat([3.05,7.2])
+        self.K = np.mat([4.45,9.5])
         self.kr = -1.0 / (self.C*np.linalg.inv(self.A-self.B*self.K)*self.B)
 
     def Ctrl(self, y_r, y):
@@ -35,6 +36,7 @@ class SSControl:
         r_tilde = y_r - self.r_e
         u_tilde = -self.K*x_tilde + self.kr*y_r
 
+        disturbance = np.mat([[0.25]])
         # solve for u
-        u = self.u_e + u_tilde
+        u = self.u_e + u_tilde + disturbance
         return u
